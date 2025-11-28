@@ -26,24 +26,16 @@ namespace Tyuiu.DevyatovEV.Sprint5.Task4.V14
             Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                        *");
             Console.WriteLine("***************************************************************************");
 
-            string path = @"C:\DataSprint5\InPutDataFileTask4V14.txt";
-            Console.WriteLine($"Путь к файлу: {path}");
+            string path = Path.Combine(new string[] { Path.GetTempPath(), "InPutDataFileTask4V14.txt" });
 
-            Console.WriteLine("***************************************************************************");
-            Console.WriteLine("* РЕЗУЛЬТАТ:                                                              *");
-            Console.WriteLine("***************************************************************************");
+            Console.WriteLine("Данные находятся в файле: " + path);
 
-            try
-            {
-                double result = ds.LoadFromDataFile(path);
-                Console.WriteLine($"Значение из файла вычислено по формуле: {result}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка: {ex.Message}");
-                Console.WriteLine("Убедитесь, что файл существует по пути: C:\\DataSprint5\\InPutDataFileTask4V14.txt");
-            }
+            Console.WriteLine("****************************************************************************************************");
+            Console.WriteLine("* РЕЗУЛЬТАТ:                                                                                       *");
+            Console.WriteLine("****************************************************************************************************");
 
+            double res = ds.LoadFromDataFile(path);
+            Console.WriteLine(res);
             Console.ReadKey();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using tyuiu.cources.programming.interfaces.Sprint5;
 
@@ -8,22 +9,21 @@ namespace Tyuiu.DevyatovEV.Sprint5.Task4.V14.Lib
     {
         public double LoadFromDataFile(string path)
         {
-            // Чтение значения из файла
-            string strValue = File.ReadAllText(path);
+            string content;
+            using (StreamReader sr = new StreamReader(path))
+            {
+                content = sr.ReadToEnd().Trim();
+            }
 
-            // Преобразование в double (с учетом региональных настроек)
-            double x = Convert.ToDouble(strValue);
+            double x;
+            if (!double.TryParse(content, NumberStyles.Any, CultureInfo.InvariantCulture, out x))
+            {
+                content = content.Replace('.', ',');
+            }
 
-            // Вычисление формулы y = sin(x³) + 2/x
-            double xCubed = Math.Pow(x, 3);
-            double sinValue = Math.Sin(xCubed);
-            double fraction = 2 / x;
-            double y = sinValue + fraction;
+            double res = Math.Round((Math.Sin(Math.Pow(Convert.ToDouble(x), 3)) + 2.0 / Convert.ToDouble(x)), 3);
+            return res;
 
-            // Округление до трёх знаков после запятой
-            y = Math.Round(y, 3);
-
-            return y;
         }
     }
 }
