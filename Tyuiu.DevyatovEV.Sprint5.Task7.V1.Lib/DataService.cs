@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using tyuiu.cources.programming.interfaces.Sprint5;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Tyuiu.DevyatovEV.Sprint5.Task7.V1.Lib
 {
@@ -14,35 +15,18 @@ namespace Tyuiu.DevyatovEV.Sprint5.Task7.V1.Lib
         {
             string pathSaveFile = Path.Combine(Path.GetTempPath(), "OutPutDataFileTask7V1.txt");
 
-            FileInfo fileInfo = new FileInfo(pathSaveFile);
-            bool fileExists = fileInfo.Exists;
+            // Читаем весь файл
+            string text = File.ReadAllText(path, Encoding.UTF8);
 
-            char[] nums = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+            // Удаляем все цифры с помощью регулярного выражения
+            string result = Regex.Replace(text, @"[0-9]", "");
 
-            if (fileExists)
-            {
-                File.Delete(pathSaveFile);
-            }
+            // Убираем лишние пробелы в начале и конце
+            result = result.Trim();
 
-            string strLine = "";
-            using (StreamReader reader = new StreamReader(path))
-            {
-                string line;
+            // Записываем результат
+            File.WriteAllText(pathSaveFile, result, Encoding.UTF8);
 
-                while ((line = reader.ReadLine()) != null)
-                {
-                    for (int i = 0; i < line.Length; i++)
-                    {
-                        char c = line[i];
-                        if (Array.IndexOf(nums, c) < 0)
-                        {
-                            strLine = strLine + line[i];
-                        }
-                    }
-                    File.AppendAllText(pathSaveFile, strLine + Environment.NewLine);
-                    strLine = "";
-                }
-            }
             return pathSaveFile;
         }
     }
