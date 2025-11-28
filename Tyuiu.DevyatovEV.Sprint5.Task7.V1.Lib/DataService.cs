@@ -21,6 +21,7 @@ namespace Tyuiu.DevyatovEV.Sprint5.Task7.V1.Lib
             // Удаляем все цифры с помощью регулярного выражения
             string result = Regex.Replace(text, @"[0-9]", "");
 
+            result = Regex.Replace(result, @"\.\s*$", "");
             // Убираем лишние пробелы в начале и конце
             result = result.Trim();
 
