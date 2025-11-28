@@ -25,36 +25,10 @@ namespace Tyuiu.DevyatovEV.Sprint5.Task3.V5
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                        *");
             Console.WriteLine("***************************************************************************");
-
-            int x = 2;
-            Console.WriteLine($"x = {x}");
-
-            Console.WriteLine("***************************************************************************");
-            Console.WriteLine("* РЕЗУЛЬТАТ:                                                              *");
-            Console.WriteLine("***************************************************************************");
-
-            // Вычисление значения для вывода на консоль
-            double result = ds.Calculate(x);
-            Console.WriteLine($"Вычисленное значение F({x}) = {result}");
-
-            // Сохранение в бинарный файл
-            string path = ds.SaveToFileTextData(x);
-            Console.WriteLine($"Результат сохранен в файл: {path}");
-
-            // Чтение и вывод содержимого бинарного файла
-            double fileValue = ReadBinaryFile(path);
-            Console.WriteLine($"Значение из файла: {fileValue}");
-
-            Console.ReadKey();
-        }
-
-        // Метод для чтения бинарного файла
-        private static double ReadBinaryFile(string path)
-        {
-            using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
-            {
-                return reader.ReadDouble();
-            }
+            Console.WriteLine("Значение x: " + x);
+            string res = ds.SaveToFileTextData(x);
+            Console.WriteLine("Файл: " + res);
+            Console.ReadLine();
         }
     }
 }

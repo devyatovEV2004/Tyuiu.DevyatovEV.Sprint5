@@ -9,15 +9,15 @@ namespace Tyuiu.DevyatovEV.Sprint5.Task3.V5.Lib
     {
         public string SaveToFileTextData(int x)
         {
-            string path = Path.Combine(Path.GetTempPath(), "OutPutFileTask3.bin");
-            double F = Calculate(x);
-
-            // Упрощенная запись в файл
-            File.WriteAllText(path, F.ToString());
-
+            DataService ds = new();
+            string path = Path.GetTempFileName();
+            double F = ds.Calculate(x);
+            using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate), Encoding.UTF8))
+            {
+                writer.Write(BitConverter.GetBytes(F));
+            }
             return path;
         }
-
         public double Calculate(int x)
         {
             double F = 2 * Math.Pow(x, 3) + 0.5 * Math.Pow(x, 2) - 3.5 * x + 2;
