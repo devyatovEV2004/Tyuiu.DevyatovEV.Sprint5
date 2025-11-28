@@ -29,18 +29,22 @@ namespace Tyuiu.DevyatovEV.Sprint5.Task7.V1
             Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                        *");
             Console.WriteLine("***************************************************************************");
 
-            string path = @"C:\DataSprint5\InPutDataFileTask7V1.txt";
+            string path = @"/app/data/AssesmentData/C#/Sprint5Task7/InPutDataFileTask7V1.txt";
             Console.WriteLine("Исходные данные находятся в файле: " + path);
 
             Console.WriteLine("***************************************************************************");
             Console.WriteLine("* РЕЗУЛЬТАТ:                                                              *");
             Console.WriteLine("***************************************************************************");
 
-            string pathSaveFile = @"C:\Users\Egor\source\repos\Tyuiu.DevyatovEV.Sprint5\Tyuiu.DevyatovEV.Sprint5.Task7.V1\bin\Debug\OutPutDataFileTask7V1.txt";
+            string pathSaveFile = ds.LoadDataAndSave(path);
             Console.WriteLine("Конечные данные находятся в файле: " + pathSaveFile);
 
-            pathSaveFile = ds.LoadDataAndSave(path);
-
+            if (File.Exists(pathSaveFile))
+            {
+                string resultContent = File.ReadAllText(pathSaveFile);
+                Console.WriteLine("Содержимое обработанного файла:");
+                Console.WriteLine(resultContent);
+            }
 
             Console.ReadKey();
         }

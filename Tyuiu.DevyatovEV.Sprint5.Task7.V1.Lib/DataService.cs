@@ -12,18 +12,16 @@ namespace Tyuiu.DevyatovEV.Sprint5.Task7.V1.Lib
     {
         public string LoadDataAndSave(string path)
         {
-            string pathSaveFile = @"C:\Users\Egor\source\repos\Tyuiu.DevyatovEV.Sprint5\Tyuiu.DevyatovEV.Sprint5.Task7.V1\bin\Debug\OutPutDataFileTask7V1.txt";
+            string pathSaveFile = Path.Combine(Path.GetTempPath(), "OutPutDataFileTask7V1.txt");
 
             FileInfo fileInfo = new FileInfo(pathSaveFile);
             bool fileExists = fileInfo.Exists;
-
 
             char[] nums = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 
             if (fileExists)
             {
                 File.Delete(pathSaveFile);
-
             }
 
             string strLine = "";
